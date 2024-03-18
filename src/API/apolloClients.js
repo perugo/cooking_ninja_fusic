@@ -14,4 +14,4 @@ const createClientWithAuth = (uri) => {
       cache: new InMemoryCache(),
     });
   };
-export const homeApi1 = createClientWithAuth('https://18.178.54.44:4000/graphql');
+export const homeApi1 = createClientWithAuth('http://localhost:4000/graphql');
