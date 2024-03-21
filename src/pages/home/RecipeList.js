@@ -2,6 +2,9 @@ import styled from "styled-components";
 
 const Container = styled.section`
 width:696px;
+margin:0px auto;
+display:flex;
+padding-top:30px;
 `
 const RecipesFlexWrapper = styled.div`
   display:flex;
@@ -17,14 +20,14 @@ const RecipesFlexWrapper = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 `
 
-const Recipe=styled.li`
+const Recipe = styled.li`
  display:block;
 `
-const ItemRoot=styled.div`
+const ItemRoot = styled.div`
  width:216px;
  position:relative;
 `
-const ALink=styled.a`
+const ALink = styled.a`
   border-radius:8px;
   width:216px;
   height:auto;
@@ -34,21 +37,20 @@ const ALink=styled.a`
 `
 
 const SVGWrapper = styled.div`
-  margin-left:5px;
-  height: 148px;
-  width: 100px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  height: 216px;
+  width: 216px;
   display: flex;
+  display:block;
 `;
 const SVGInner = styled.div`
+  display:block;
+  height:auto;
+  width:100%;
   position: relative;
-  width: inherit;
-  height: inherit;
-  margin: auto;
+  margin: 0;
 `;
 const StyledImg = styled.img`
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   width: 100%;
@@ -56,26 +58,58 @@ const StyledImg = styled.img`
   z-index: 2; // Ensure the image is always on top
 `;
 
+const VideoListInfo = styled.div`
+  background:transparent;
+  border:0;
+  margin:0;
+  padding:0;
+  vertical-align:baseline;
+  
+`
+const VideoListTitle = styled.div`
+  height:44px;
+  width:216px;
+  margin:8px 0;
+  background:transparent;
+  font-size:1;
+  font-weight:400;
+`
+const VideoTitleRoot = styled.p`
+  line-height:1em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  font-size:17px;
+  font-weight:bold;
+  letter-spacing:.15px;
+  line-height:130%;
+`
 export const RecipeList = ({ recipes }) => {
   return (
     <Container>
       <RecipesFlexWrapper>
 
-        {recipes.map((recipe, index) => (
-          <Recipe key={recipe.id}>
+        {recipes && recipes.map((recipe, index) => (
+          <Recipe key={recipe.id}
+            style={{
+              // インデックスを使用して条件をチェックする（配列のインデックスは0から始まるため、+1をして調整）
+              margin: ((index + 1) % 3 === 2) ? '0px 16px' : '0'
+            }}>
             <ItemRoot>
-            <ALink href={`/recipes/${recipe.id}`}>
-            <SVGWrapper>
-              <SVGInner>
-                <StyledImg
-                  src={recipe.frontImg}
-                  alt="sine formula"
-                />
-              </SVGInner>
-            </SVGWrapper>
-            </ALink>
-            <h3>{recipe.title}</h3>
-           </ItemRoot>
+              <ALink href={`http://localhost:3000/recipes/${recipe.id}`}>
+                <SVGWrapper>
+                  <SVGInner>
+                    <StyledImg
+                      src={recipe.frontImg}
+                      alt="sine formula"
+                    />
+                  </SVGInner>
+                </SVGWrapper>
+              </ALink>
+              <VideoListInfo>
+                <VideoListTitle>
+                  <VideoTitleRoot>{recipe.title}</VideoTitleRoot>
+                </VideoListTitle>
+              </VideoListInfo>
+            </ItemRoot>
           </Recipe>
         ))}
 

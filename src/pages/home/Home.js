@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { RecipeList } from './RecipeList';
 
 export const Wrapper = styled.div`
-  padding:10px 10px 0px 20px;
+  background-color:#fff;
 `;
-
+/*
 const GET_DATA = gql`
   query GetHello {
     recipes {
@@ -20,6 +20,16 @@ const GET_DATA = gql`
         amount
       }
       instructions
+    }
+  }
+`;
+*/
+const GET_DATA = gql`
+  query GetHello {
+    recipes {
+      id
+      frontImg
+      title
     }
   }
 `;

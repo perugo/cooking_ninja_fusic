@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { DispRecipe } from './DispRecipe';
 
 export const Wrapper = styled.div`
-  padding:10px 10px 0px 20px;
+  background-color:#fff;
 `;
 
 const GET_RECIPE = gql`
@@ -14,12 +14,22 @@ const GET_RECIPE = gql`
     recipe(id:$id) {
       id
       title
-      ingredients
-      method
-      cookingTime
+      frontImg
+      description
+      author
+      serving
+      categories {
+        categoryName
+        ingredients {
+          name
+          amount
+        }
+      }
+      instructions
     }
   }
 `;
+
 export default function Recipe() {
   const { id } = useParams()
   const { loading, error, data: fetchedData } = useQuery(GET_RECIPE, {
@@ -30,6 +40,7 @@ export default function Recipe() {
   useEffect(()=>{
     if (fetchedData) {
       console.log(fetchedData.recipe);
+      console.log("こんいちは");
     }
   },[fetchedData])
 
