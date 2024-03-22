@@ -25,16 +25,19 @@ const GET_DATA = gql`
 `;
 */
 const GET_DATA = gql`
-  query GetHello {
-    recipes {
+  query GetHello($windowWidth: Int!) {
+    recipes(windowWidth:$windowWidth) {
       id
       frontImg
       title
     }
   }
 `;
-export default function Home() {
+
+export default function Home({windowWidth}) {
+
   const { loading, error, data: fetchedData } = useQuery(GET_DATA, {
+    variables:{windowWidth},
     context: { clientName: 'homeApi1' } // Apollo Clientの選択
   });
 

@@ -10,8 +10,8 @@ export const Wrapper = styled.div`
 `;
 
 const GET_RECIPE = gql`
-  query GetRECIPE($id: String!) {
-    recipe(id:$id) {
+  query GetRECIPE($id: String!,$windowWidth:Int!) {
+    recipe(id:$id,windowWidth:$windowWidth) {
       id
       title
       frontImg
@@ -30,17 +30,16 @@ const GET_RECIPE = gql`
   }
 `;
 
-export default function Recipe() {
+export default function Recipe({windowWidth}) {
   const { id } = useParams()
   const { loading, error, data: fetchedData } = useQuery(GET_RECIPE, {
-    variables: { id }, // Pass the id as a variable to your GraphQL query
+    variables: { id,windowWidth }, // Pass the id as a variable to your GraphQL query
     context: { clientName: 'homeApi1' } // Apollo Clientの選択
   });
 
   useEffect(()=>{
     if (fetchedData) {
       console.log(fetchedData.recipe);
-      console.log("こんいちは");
     }
   },[fetchedData])
 

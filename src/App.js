@@ -1,6 +1,6 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import { useState } from 'react';
 import Navbar from './components/Navbar';
 
 import Home from './pages/home/Home'
@@ -18,17 +18,22 @@ const PrimaryClient = new ApolloClient({
   link: combinedLink,
   cache: new InMemoryCache(),
 });
+
+
 function App() {
+
+  const [width, setWidth] = useState(window.innerWidth);
+
   return (
     <ApolloProvider client={PrimaryClient}>
       <BrowserRouter>
         <div className="App">
           <Navbar />
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/recipes/:id" element={<Recipe />} />
+            <Route path="/" element={<Home windowWidth={width} />} />
+            <Route path="/create" element={<Create windowWidth={width} />} />
+            <Route path="/search" element={<Search windowWidth={width} />} />
+            <Route path="/recipes/:id" element={<Recipe windowWidth={width} />} />
           </Routes>
         </div >
       </BrowserRouter>

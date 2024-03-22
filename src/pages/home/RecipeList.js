@@ -94,7 +94,7 @@ export const RecipeList = ({ recipes }) => {
               margin: ((index + 1) % 3 === 2) ? '0px 16px' : '0'
             }}>
             <ItemRoot>
-              <ALink href={`http://localhost:3000/recipes/${recipe.id}`}>
+              <ALink href={`${window.location.protocol}//${window.location.host}/recipes/${recipe.id}`}>
                 <SVGWrapper>
                   <SVGInner>
                     <StyledImg
