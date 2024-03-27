@@ -1,10 +1,13 @@
 import { Container, NavContainer, LinkBrand, LinkNavbar, H1 } from './StyledNavbar';
 import styled from 'styled-components';
+import React from 'react';
+
 // styles
 const SVGWrapperLogo = styled.div`
   height: 44px;
   width: 160px;
   position:relative;
+
 `;
 const SVGWrapperIcon = styled.div`
   height: 47px;

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import React from 'react';
 
 const Container = styled.section`
 width:696px;
@@ -82,7 +83,7 @@ const VideoTitleRoot = styled.p`
   letter-spacing:.15px;
   line-height:130%;
 `
-export const RecipeList = ({ recipes }) => {
+export const RecipeListPC = ({ recipes }) => {
   return (
     <Container>
       <RecipesFlexWrapper>
