@@ -7,14 +7,6 @@ width:100%;
 background:#fff;
 `
 
-const Article = styled.article`
-  -webkit-box-align:center;
-  align-items:center;
-  display:flex;
-  flex-flow:column nowrap;
-  height:auto;
-  width:100%;
-`
 const ContentTopBreadCrumbRoot = styled.div`
 border-bottom:1px solid #d3d2cd;
 overflow-x:auto;
@@ -24,11 +16,9 @@ z-index:1001;
 
 const ContentWrapper = styled.div`
 display:flex;
-flex-flow:row nowrap;
 height:auto;
-margin:0 0 48px;
-padding:30px 0 0;
-width:850px;
+width:100%;
+height:auto;
 `
 
 const MainContent = styled.div`
@@ -37,50 +27,60 @@ const MainContent = styled.div`
   flex:0 0 auto;
   flex-flow:column nowrap;
   height:auto;
-  width:696px;
+  width:100%;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   font-weight:400;
   line-height:1em;
 `
 const MainRecipeWrapper = styled.div`
-  display:block; 
+  background:transparent;
+  border:0;
+  outline:0;
+  padding:0;
+  vertical-align:baseline;
 `
 
-const TitleWrapper = styled.div`
-margin:40px 0 8px;
+const TitleWrap = styled.div`
+ margin:16px 0;
 `
+
 const TitleText = styled.h1`
 color: #000;
-margin: 0 20px 0 0;
-font-size: 24px;
+font-size: 17px;
 font-weight: bold;
-letter-spacing: 0;
+letter-spacing: .15px;
 line-height: 130%;
 background: transparent;
-border: 0;
-font-size: 100%;
-margin: 0;
+border:0;
+margin:16px 16px;
 outline: 0;
 padding: 0;
 vertical-align: baseline;
+
+display:flex;
+-webkit-box-pack:justify;
+justify-content:space-between;
+
 `
+const TitleBody=styled.div`
+
+`
+
 const Introduction = styled.p`
 color:#000;
-font-size:17px;
+font-size:14px;
+font-weight:400;
 line-height:25px;
-margin:16px 0 0;
+letter-spacing:.25px;
+margin:5px 16px;
 padding:0 20px 0 0;
 white-space:pre-wrap;
 word-wrap:break-word;
 
 `
 const Ingredients = styled.section`
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  flex-flow:column nowrap;
-  margin: 44px 0 0;
-  padding: 0 20px 0 0;
+margin: 24px 16px 16px;
+    position: relative;
 `
 const IngredientsText = styled.h2`
 color:#000;
@@ -176,12 +176,10 @@ line-height: 25px;
 `
 
 const InstructionsWrapper = styled.section`
-  display:flex;
-  -webkit-box-orient:vertical;
-  -webkit-box-direction:normal;
-  flex-flow:column nowrap;
-  margin:40px 0 0;
-  padding:0 20px 0 0;
+margin: 48px 16px;
+position: relative;
+padding:0;
+border:0;
 `
 const InstructionsTitle = styled.h2`
   color:#000;
@@ -288,15 +286,15 @@ border:0;
 
 
 const RecipeImageWrapper = styled.div`
-  display:flex;
-  -webkit-box-pack:center;
-  justify-content:center;
+  width:100vw;
+  height:100vw;
+  position:relative;
 `
 
 
 const SVGWrapper = styled.div`
-  height: 560px;
-  width: 560px;
+  height: inherit;
+  width: 100%;
   position:relative;
 `;
 
@@ -313,76 +311,68 @@ const StyledImg = styled.img`
   width: 100%;
   height: 100%;
   z-index: 2; // Ensure the image is always on top
-  border-radius:11px;
+  border-radius:4px;
 
 `;
 
-export const DispRecipe = ({ recipe }) => {
+export const DispRecipeMobile = ({ recipe }) => {
   return (
     <Container>
-      <Article>
-        <ContentTopBreadCrumbRoot>
-
-        </ContentTopBreadCrumbRoot>
-        <ContentWrapper>
-          <MainContent>
-            {recipe && (
-              <MainRecipeWrapper key={recipe.id}>
-
-                <RecipeImageWrapper >
-                  <SVGWrapper>
-                    <SVGInner>
-                      <StyledImg
-                        src={`${recipe.frontImg}`}
-                        alt="sine formula"
-                      />
-                    </SVGInner>
-                  </SVGWrapper>
-                </RecipeImageWrapper>
-                <TitleWrapper><TitleText>{recipe.title}</TitleText></TitleWrapper>
-                <Introduction>{recipe.description}</Introduction>
-                <Ingredients>
-                  <IngredientsText>材料 <ServingText>({recipe.serving})</ServingText></IngredientsText>
-                  <IngredientsList>
-                    {recipe.categories.map((category, categoryIndex) => (
-                      <React.Fragment key={categoryIndex}>
-                        {/* カテゴリー名を動的に表示 */}
-                        {category.categoryName !== "" && (
-                          <IngredientCategoryTitle>{category.categoryName}</IngredientCategoryTitle>
-                        )}
-                        {category.ingredients.map((ingredient, ingredientIndex) => (
-                          <IngredientItem key={ingredientIndex}   style={category.categoryName !== "" ? { borderLeft: "3px solid #f4f2f0", paddingLeft: "8px" } : {}}
-                          >
-                            <IngredientName>{ingredient.name}</IngredientName> <IngredientQuantity>{ingredient.amount}</IngredientQuantity>
-                          </IngredientItem>
-                        ))}
-                      </React.Fragment>
-                    ))}
-                  </IngredientsList>
-                </Ingredients>
-                <InstructionsWrapper>
-                  <InstructionsTitle>作り方</InstructionsTitle>
-                  <InstructionList>
-                    {recipe.instructions.map((instruction, index) => (
-                      <InstructionListItem key={index}>
-                        <InstructionListIndex>{index + 1}</InstructionListIndex>
-                        <InstructionListContent>{instruction}</InstructionListContent>
-                      </InstructionListItem>
-                    ))}
-                  </InstructionList>
-                </InstructionsWrapper>
-              </MainRecipeWrapper>
-            )}
-          </MainContent>
-        </ContentWrapper>
-
-      </Article>
+      <ContentTopBreadCrumbRoot>
+      </ContentTopBreadCrumbRoot>
+      <ContentWrapper>
+        <MainContent>
+          {recipe && (
+            <MainRecipeWrapper key={recipe.id}>
+              <TitleWrap>
+                <TitleBody><TitleText>{recipe.title}</TitleText></TitleBody>
+              </TitleWrap>
+              <RecipeImageWrapper >
+                <SVGWrapper>
+                  <SVGInner>
+                    <StyledImg
+                      src={`${recipe.frontImg}`}
+                      alt="sine formula"
+                    />
+                  </SVGInner>
+                </SVGWrapper>
+              </RecipeImageWrapper>
+              <Introduction>{recipe.description}</Introduction>
+              <Ingredients>
+                <IngredientsText>材料 <ServingText>({recipe.serving})</ServingText></IngredientsText>
+                <IngredientsList>
+                  {recipe.categories.map((category, categoryIndex) => (
+                    <React.Fragment key={categoryIndex}>
+                      {/* カテゴリー名を動的に表示 */}
+                      {category.categoryName !== "" && (
+                        <IngredientCategoryTitle>{category.categoryName}</IngredientCategoryTitle>
+                      )}
+                      {category.ingredients.map((ingredient, ingredientIndex) => (
+                        <IngredientItem key={ingredientIndex} style={category.categoryName !== "" ? { borderLeft: "3px solid #f4f2f0", paddingLeft: "8px" } : {}}
+                        >
+                          <IngredientName>{ingredient.name}</IngredientName> <IngredientQuantity>{ingredient.amount}</IngredientQuantity>
+                        </IngredientItem>
+                      ))}
+                    </React.Fragment>
+                  ))}
+                </IngredientsList>
+              </Ingredients>
+              <InstructionsWrapper>
+                <InstructionsTitle>作り方</InstructionsTitle>
+                <InstructionList>
+                  {recipe.instructions.map((instruction, index) => (
+                    <InstructionListItem key={index}>
+                      <InstructionListIndex>{index + 1}</InstructionListIndex>
+                      <InstructionListContent>{instruction}</InstructionListContent>
+                    </InstructionListItem>
+                  ))}
+                </InstructionList>
+              </InstructionsWrapper>
+            </MainRecipeWrapper>
+          )}
+        </MainContent>
+      </ContentWrapper>
     </Container >
 
   )
 }
-//        <Link to={`/recipes/${recipe.id}`}>Cook This</Link>
-/*
-                      ))}
-
-*/

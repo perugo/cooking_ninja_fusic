@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React from 'react';
 
 const Container = styled.section`
-width:100%;
 display:flex;
 flex-wrap:wrap;
 padding:0 4px;
@@ -33,10 +32,18 @@ unicode-bidi:isolate;
 width:100%;
 `
 const RecipeItems=styled.ul`
-display:flex;
-flex-wrap:nowrap;
-padding:0 4px;
-width:100%;
+display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  list-style: none; /* 箇条書きのスタイルをなくす */
+  margin: 0; /* 余白をなくす */
+  width: 100%; /* ul要素の幅を画面の100%にする */
+
+  border: 0;
+  font-size: 100%;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
 `
 const SectionTitleH2 = styled.div`
   font-size:17px;
@@ -46,11 +53,10 @@ const SectionTitleH2 = styled.div`
 `
 
 const Recipe = styled.li`
- box-sizing:border-box;
- display:block;
- padding:10px 4px 6px;
- width:50%;
-
+width: 50%; /* 各項目の幅をコンテナの50%に設定 */
+  padding: 4px; /* 余白を追加 */
+  box-sizing: border-box; /* パディングとボーダーを幅と高さに含める */
+  margin:-2px;
 `
 const ItemRoot = styled.div`
  position:relative;
@@ -105,10 +111,15 @@ const VideoListTitle = styled.div`
 const VideoTitleRoot = styled.p`
   line-height:1em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-  font-size:17px;
+  font-size:14px;
   font-weight:bold;
-  letter-spacing:.15px;
+  letter-spacing:.1px;
   line-height:130%;
+  box--sizing:border-box;
+  margin:0;
+  outline:0;
+  padding:0;
+  vertical-align:baseline;
 `
 export const RecipeListMobile = ({ recipes }) => {
   return (

@@ -3,10 +3,15 @@ import React,{useState,useEffect,useRef} from 'react';
 import { useParams } from 'react-router-dom'
 
 import styled from 'styled-components';
-import { DispRecipe } from './DispRecipe';
+import { DispRecipePC } from './DispRecipePC';
+import { DispRecipeMobile } from './DispRecipeMobile';
+
 
 export const Wrapper = styled.div`
   background-color:#fff;
+  margin:0 auto;
+  position:relative;
+  width:100%;
 `;
 
 const GET_RECIPE = gql`
@@ -30,7 +35,7 @@ const GET_RECIPE = gql`
   }
 `;
 
-export default function Recipe({windowWidth}) {
+export default function Recipe({windowWidth,isMobile}) {
   const { id } = useParams()
   const { loading, error, data: fetchedData } = useQuery(GET_RECIPE, {
     variables: { id,windowWidth }, // Pass the id as a variable to your GraphQL query
@@ -48,8 +53,11 @@ export default function Recipe({windowWidth}) {
 
   return (
     <Wrapper>
-
-      {fetchedData && <DispRecipe recipe={fetchedData.recipe}/>}
+      {fetchedData && (
+        isMobile ? 
+        <DispRecipeMobile recipe={fetchedData.recipe}/>:
+        <DispRecipePC recipe={fetchedData.recipe}/>
+      )}
     </Wrapper>
   )
 }

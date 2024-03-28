@@ -6,7 +6,28 @@ width:696px;
 margin:0px auto;
 display:flex;
 padding-top:30px;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+
 `
+
+const HeadLine = styled.div`
+margin: 24px 20px 16px 0;
+    padding-bottom: 8px;
+    width: auto;
+
+    padding:0 0 10px;
+    font-size:20px;
+    height:auto;
+    border-bottom:1px solid #ededed;
+    box-sizing:border-box;
+    display:block;
+    letter-spacing:0;
+    line-height:130%;
+    outline:0;
+    font-weight:bold;
+    color:#2b2a27;
+`
+
 const RecipesFlexWrapper = styled.div`
   display:flex;
   -webkit-box-orient: horizontal;
@@ -86,35 +107,38 @@ const VideoTitleRoot = styled.p`
 export const RecipeListPC = ({ recipes }) => {
   return (
     <Container>
-      <RecipesFlexWrapper>
+      <div>
+        <HeadLine>レシピ一覧</HeadLine>
 
-        {recipes && recipes.map((recipe, index) => (
-          <Recipe key={recipe.id}
-            style={{
-              // インデックスを使用して条件をチェックする（配列のインデックスは0から始まるため、+1をして調整）
-              margin: ((index + 1) % 3 === 2) ? '0px 16px' : '0'
-            }}>
-            <ItemRoot>
-              <ALink href={`${window.location.protocol}//${window.location.host}/recipes/${recipe.id}`}>
-                <SVGWrapper>
-                  <SVGInner>
-                    <StyledImg
-                      src={recipe.frontImg}
-                      alt="sine formula"
-                    />
-                  </SVGInner>
-                </SVGWrapper>
-              </ALink>
-              <VideoListInfo>
-                <VideoListTitle>
-                  <VideoTitleRoot>{recipe.title}</VideoTitleRoot>
-                </VideoListTitle>
-              </VideoListInfo>
-            </ItemRoot>
-          </Recipe>
-        ))}
+        <RecipesFlexWrapper>
+          {recipes && recipes.map((recipe, index) => (
+            <Recipe key={recipe.id}
+              style={{
+                // インデックスを使用して条件をチェックする（配列のインデックスは0から始まるため、+1をして調整）
+                margin: ((index + 1) % 3 === 2) ? '0px 16px' : '0'
+              }}>
+              <ItemRoot>
+                <ALink href={`${window.location.protocol}//${window.location.host}/recipes/${recipe.id}`}>
+                  <SVGWrapper>
+                    <SVGInner>
+                      <StyledImg
+                        src={recipe.frontImg}
+                        alt="sine formula"
+                      />
+                    </SVGInner>
+                  </SVGWrapper>
+                </ALink>
+                <VideoListInfo>
+                  <VideoListTitle>
+                    <VideoTitleRoot>{recipe.title}</VideoTitleRoot>
+                  </VideoListTitle>
+                </VideoListInfo>
+              </ItemRoot>
+            </Recipe>
+          ))}
 
-      </RecipesFlexWrapper>
+        </RecipesFlexWrapper>
+      </div>
     </Container>
   )
 }

@@ -21,7 +21,6 @@ const PrimaryClient = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
 
   const [width, setWidth] = useState(window.innerWidth);
